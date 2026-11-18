@@ -10,7 +10,12 @@
 
 def two_sum(nums, target):
     # Outline (write your plan here first):
-    #   ...
+    # Restate: find two indices i and j whose values add to target.
+    # Example: [3, 2, 4], target 6 -> [1, 2] because 2 + 4 = 6.
+    # Approach: use a dictionary to remember each number seen and its index.
+    # For each index i, calculate need = target - nums[i].
+    # If need is already in the dictionary, return [old_index, i].
+    # Otherwise, store nums[i] with i.
     # TODO: return the indices [i, j] (i < j) of the two numbers in `nums` that add up
     #   to `target`. Assume there is exactly one answer.
     pass
@@ -18,7 +23,13 @@ def two_sum(nums, target):
 
 def max_profit(prices):
     # Outline:
-    #   ...
+    # Restate: choose a buy day before a sell day and maximize sell - buy.
+    # Example: [7, 1, 5, 3, 6, 4] -> buy at 1, sell at 6 for 5.
+    # Approach: track the lowest price seen so far and the best profit.
+    # For each price:
+    #   update the lowest price if this price is smaller.
+    #   calculate price - lowest_price and update the best profit if larger.
+    # Return 0 if no positive profit was found.
     # TODO: `prices[i]` is a stock price on day i. Return the most profit obtainable by
     #   buying on one day and selling on a LATER day. If no profit is possible, return 0.
     pass
@@ -26,7 +37,14 @@ def max_profit(prices):
 
 def max_subarray(nums):
     # Outline:
-    #   ...
+    # Restate: find the contiguous block with the largest sum.
+    # Example: [-2, 1, -3, 4, -1, 2, 1, -5, 4] -> 6.
+    # Approach: scan left to right while maintaining the best sum ending here.
+    # For each number:
+    #   extend the current block or start a new block with this number,
+    #   whichever gives the larger sum.
+    # Track the largest block sum found.
+    # Initialize both values from the first number.
     # TODO: return the largest sum of any contiguous (in-a-row) block of numbers in
     #   `nums`. The list has at least one number.
     pass
@@ -34,7 +52,14 @@ def max_subarray(nums):
 
 def is_balanced(s):   # Part 4 - stretch (optional)
     # Outline:
-    #   ...
+    # Restate: determine whether brackets close in a valid matching order.
+    # Example: "{[]}" is valid; "([)]" is invalid.
+    # Approach: use a list as a stack.
+    # On an opening bracket, push it onto the stack.
+    # On a closing bracket, check that the stack is not empty and that its
+    # top opening bracket matches this closing bracket; if not, return False.
+    # Pop the matching opening bracket from the stack.
+    # Return True only if the stack is empty at the end.
     # TODO: return True if every bracket in `s` is closed correctly and in the right
     #   order. The brackets are ( ) [ ] { }. (Hint: a list used as a stack works well.)
     pass

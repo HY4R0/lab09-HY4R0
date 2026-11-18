@@ -18,7 +18,13 @@ def two_sum(nums, target):
     # Otherwise, store nums[i] with i.
     # TODO: return the indices [i, j] (i < j) of the two numbers in `nums` that add up
     #   to `target`. Assume there is exactly one answer.
-    pass
+    seen = {}
+    for i, num in enumerate(nums):
+        need = target - num
+        if need in seen:
+            return [seen[need], i]
+        seen[num] = i
+    return []
 
 
 def max_profit(prices):
@@ -27,12 +33,21 @@ def max_profit(prices):
     # Example: [7, 1, 5, 3, 6, 4] -> buy at 1, sell at 6 for 5.
     # Approach: track the lowest price seen so far and the best profit.
     # For each price:
-    #   update the lowest price if this price is smaller.
-    #   calculate price - lowest_price and update the best profit if larger.
+    # update the lowest price if this price is smaller.
+    # calculate price - lowest_price and update the best profit if larger.
     # Return 0 if no positive profit was found.
     # TODO: `prices[i]` is a stock price on day i. Return the most profit obtainable by
     #   buying on one day and selling on a LATER day. If no profit is possible, return 0.
-    pass
+    if not prices:
+        return 0
+
+    lowest_price = prices[0]
+    best_profit = 0
+    for price in prices:
+        if price < lowest_price:
+            lowest_price = price
+        best_profit = max(best_profit, price - lowest_price)
+    return best_profit
 
 
 def max_subarray(nums):
@@ -41,13 +56,20 @@ def max_subarray(nums):
     # Example: [-2, 1, -3, 4, -1, 2, 1, -5, 4] -> 6.
     # Approach: scan left to right while maintaining the best sum ending here.
     # For each number:
-    #   extend the current block or start a new block with this number,
-    #   whichever gives the larger sum.
+    # extend the current block or start a new block with this number,
+    # whichever gives the larger sum.
     # Track the largest block sum found.
     # Initialize both values from the first number.
     # TODO: return the largest sum of any contiguous (in-a-row) block of numbers in
     #   `nums`. The list has at least one number.
-    pass
+    current_sum = nums[0]
+    best_sum = nums[0]
+
+    for num in nums[1:]:
+        current_sum = max(num, current_sum + num)
+        best_sum = max(best_sum, current_sum)
+
+    return best_sum
 
 
 def is_balanced(s):   # Part 4 - stretch (optional)
@@ -62,7 +84,18 @@ def is_balanced(s):   # Part 4 - stretch (optional)
     # Return True only if the stack is empty at the end.
     # TODO: return True if every bracket in `s` is closed correctly and in the right
     #   order. The brackets are ( ) [ ] { }. (Hint: a list used as a stack works well.)
-    pass
+    stack = []
+    pairs = {")": "(", "]": "[", "}": "{"}
+
+    for char in s:
+        if char in "([{":
+            stack.append(char)
+        elif char in pairs:
+            if not stack or stack[-1] != pairs[char]:
+                return False
+            stack.pop()
+
+    return not stack
 
 
 def main():
